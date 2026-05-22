@@ -1,0 +1,44 @@
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import DotBackground from './components/DotBackground'
+import MouseSpotlight from './components/MouseSpotlight'
+import Home from './pages/Home'
+import About from './pages/About'
+import Services from './pages/Services'
+import Portfolio from './pages/Portfolio'
+// import Blog from './pages/Blog'
+import Contact from './pages/Contact'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    document.documentElement.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+    document.body.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+  }, [pathname])
+  return null
+}
+
+export default function App() {
+  return (
+    <>
+      <DotBackground />
+      <MouseSpotlight />
+      <ScrollToTop />
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          {/* <Route path="/blog" element={<Blog />} /> */}
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </main>
+      <Footer />
+    </>
+  )
+}
