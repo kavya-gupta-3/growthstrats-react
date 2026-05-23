@@ -173,7 +173,7 @@ export default function About() {
 
           <div className="team-grid" style={{ marginTop: 48 }}>
             {[
-              { name: 'Arvind', role: 'Chief Strategist', bio: 'Leads the vision, growth strategy, and AI-first digital transformation initiatives at Growth Strats, helping businesses scale through modern technology and intelligent execution.', img: '/assets/team_1.png', links: [{ text: 'Email', url: 'mailto:hello@growthstrats.com' }] },
+              { name: 'Arvind', role: 'Chief Strategist', bio: 'Leads the vision, growth strategy, and AI-first digital transformation initiatives at Growth Strats, helping businesses scale through modern technology and intelligent execution.', img: '/assets/team_1.png', links: [{ text: 'Email', url: 'mailto:info@growthstrats.com' }] },
               { name: 'Umesh', role: 'CTO', bio: 'Oversees AI engineering, development architecture, and scalable technology solutions, ensuring high-performance digital products and efficient AI-enabled workflows.', img: '/assets/team_4.jpeg', links: [] },
               { name: 'Mini', role: 'COO / CPO', bio: 'Drives operations, product execution, and client delivery while creating seamless digital experiences focused on business growth and customer success.', img: '/assets/team_5.jpeg', links: [] },
               { name: 'Kavya', role: 'AI Solution Lead', bio: 'Focused on AI research, solution experimentation, and implementation support, helping drive innovation and AI-enabled workflows across digital products and client solutions at Growth Strats.', img: '/assets/team_3.jpeg', links: [] },

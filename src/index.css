@@ -295,10 +295,20 @@ p{color:var(--color-muted);margin:0 0 16px}
   .mobile-toggle{display:flex}
   
   /* Vertical layouts with 2 columns to keep height compact */
-  .grid-2, .grid-3, .grid-4, .team-grid, .stats {
+  .stats {
     display: grid !important;
     grid-template-columns: repeat(2, 1fr) !important;
     gap: 12px !important;
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+    overflow-x: visible !important;
+  }
+  
+  /* Vertical layout with 1 column for grids and team-grid on mobile to keep items readable and balanced */
+  .grid-2, .grid-3, .grid-4, .team-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
     margin-right: 0 !important;
     padding-right: 0 !important;
     overflow-x: visible !important;

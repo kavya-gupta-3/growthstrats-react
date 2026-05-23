@@ -122,7 +122,7 @@ export default function Contact() {
                     <div className="icon"><IconMail /></div>
                     <h3>Email</h3>
                   </div>
-                  <p><a href="mailto:hello@growthstrats.com">hello@growthstrats.com</a></p>
+                  <p><a href="mailto:info@growthstrats.com">info@growthstrats.com</a></p>
                   <p style={{ margin: 0, fontSize: 13 }}>Average reply: under 4 working hours.</p>
                 </GlowCard>
                 <GlowCard>

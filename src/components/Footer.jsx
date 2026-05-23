@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import ScrollReveal from './ScrollReveal'
+import { IconLinkedin } from './Icons'
 
 export default function Footer() {
   return (
@@ -36,8 +37,12 @@ export default function Footer() {
         <ScrollReveal direction="up" delay={300}>
           <div>
             <h4>Get in touch</h4>
-            <a href="mailto:hello@growthstrats.com">hello@growthstrats.com</a>
-            <Link to="/contact">Request a quote</Link>
+            <a href="mailto:info@growthstrats.com">info@growthstrats.com</a>
+            <Link to="/contact" style={{ marginBottom: '16px' }}>Request a quote</Link>
+            <a href="https://www.linkedin.com/company/growthstrats/" target="_blank" rel="noopener noreferrer" className="social-link" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginTop: '8px' }}>
+              <IconLinkedin style={{ width: '18px', height: '18px' }} />
+              <span>LinkedIn</span>
+            </a>
           </div>
         </ScrollReveal>
       </div>
