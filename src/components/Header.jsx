@@ -17,7 +17,7 @@ export default function Header() {
     <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
       <div className="container nav">
         <Link to="/" className="brand">
-          <img src="/assets/logo.png" alt="GrowthStrats Build Logo" style={{ height: '48px', width: 'auto', display: 'block', objectFit: 'contain' }} />
+          <img src="/assets/logo.png" alt="GrowthStrats Build Logo" className="header-logo" />
         </Link>
         <button className="mobile-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           <span /><span /><span />

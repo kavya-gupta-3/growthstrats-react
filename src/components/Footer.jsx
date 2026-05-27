@@ -9,7 +9,7 @@ export default function Footer() {
         <ScrollReveal direction="up">
           <div className="footer-brand">
             <Link to="/" className="brand footer-brand-link" style={{ display: 'inline-block' }}>
-              <img src="/assets/Logo-white-1.png" alt="GrowthStrats Build Logo" style={{ height: '48px', width: 'auto', display: 'block', objectFit: 'contain' }} />
+              <img src="/assets/Logo-white-1.png" alt="GrowthStrats Build Logo" className="footer-logo" />
             </Link>
             <p>AI-powered web development for small and mid-sized businesses across the US, UK, and Australia.</p>
           </div>
