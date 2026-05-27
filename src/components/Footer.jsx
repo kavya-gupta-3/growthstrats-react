@@ -8,9 +8,8 @@ export default function Footer() {
       <div className="container footer-grid">
         <ScrollReveal direction="up">
           <div className="footer-brand">
-            <Link to="/" className="brand footer-brand-link">
-              <img src="/assets/logo.png" alt="GrowthStrats Build Logo" />
-              <span>GrowthStrats <small>Build</small></span>
+            <Link to="/" className="brand footer-brand-link" style={{ display: 'inline-block' }}>
+              <img src="/assets/Logo-white-1.png" alt="GrowthStrats Build Logo" style={{ height: '48px', width: 'auto', display: 'block', objectFit: 'contain' }} />
             </Link>
             <p>AI-powered web development for small and mid-sized businesses across the US, UK, and Australia.</p>
           </div>

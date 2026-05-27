@@ -17,8 +17,7 @@ export default function Header() {
     <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
       <div className="container nav">
         <Link to="/" className="brand">
-          <img src="/assets/logo.png" alt="GrowthStrats Build Logo" style={{ height: 32, width: 'auto' }} />
-          GrowthStrats <small>Build</small>
+          <img src="/assets/logo.png" alt="GrowthStrats Build Logo" style={{ height: '48px', width: 'auto', display: 'block', objectFit: 'contain' }} />
         </Link>
         <button className="mobile-toggle" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">
           <span /><span /><span />
@@ -29,7 +28,7 @@ export default function Header() {
           <NavLink to="/services" onClick={() => setMenuOpen(false)}>Services</NavLink>
           <NavLink to="/portfolio" onClick={() => setMenuOpen(false)}>Portfolio</NavLink>
           {/* <NavLink to="/blog" onClick={() => setMenuOpen(false)}>Blog</NavLink> */}
-          <Link to="/contact" className="btn btn-primary btn-shimmer" onClick={() => setMenuOpen(false)}>Get a Quote</Link>
+          <Link to="/contact" className="btn btn-primary btn-shimmer" style={{ color: '#ffffff' }} onClick={() => setMenuOpen(false)}>Get a Quote</Link>
         </nav>
       </div>
     </header>
