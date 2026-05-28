@@ -47,6 +47,7 @@ const teamVideos = [
 export default function Home() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false); // Track play state
   const videoRef = useRef(null);
   const isInitialLoad = useRef(true);
 
@@ -71,6 +72,18 @@ export default function Home() {
     }
   };
 
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play().catch(err => {
+          console.log("Play failed:", err);
+        });
+      }
+    }
+  };
+
   const changeSlide = (newIndex) => {
     setIsTransitioning(true);
     setTimeout(() => {
@@ -92,6 +105,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    setIsPlaying(false); // Reset play state when activeIndex changes
     if (videoRef.current) {
       videoRef.current.load();
       if (isInitialLoad.current) {
@@ -312,7 +326,22 @@ export default function Home() {
                   loop
                   playsInline
                   controls
+                  onPlay={() => setIsPlaying(true)}
+                  onPause={() => setIsPlaying(false)}
                 />
+
+                {/* Glassmorphic Play Button Overlay in the Center */}
+                {!isPlaying && (
+                  <button 
+                    className="video-play-overlay" 
+                    onClick={togglePlay}
+                    aria-label="Play video"
+                  >
+                    <svg viewBox="0 0 24 24">
+                      <polygon points="6 4 20 12 6 20 6 4" />
+                    </svg>
+                  </button>
+                )}
 
                 {/* Right Chevron Button inside video pane */}
                 <button 

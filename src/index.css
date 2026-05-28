@@ -634,6 +634,47 @@ html, body {
   box-shadow: 0 0 10px rgba(6, 182, 212, 0.6);
 }
 
+/* Glassmorphic Play Button Overlay in the Center */
+.video-play-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.5); /* Semi-transparent dark overlay */
+  border: 2px solid rgba(255, 255, 255, 0.3); /* Premium white border */
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+  padding: 0;
+}
+.video-play-overlay:hover {
+  background: #06b6d4;
+  border-color: #06b6d4;
+  color: #ffffff;
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 0 30px rgba(6, 182, 212, 0.6);
+}
+.video-play-overlay svg {
+  width: 28px;
+  height: 28px;
+  fill: currentColor;
+  margin-left: 4px; /* Offset visual alignment for play triangle icon */
+  transition: transform 0.3s ease;
+}
+.video-play-overlay:hover svg {
+  transform: scale(1.05);
+}
+
 /* Responsive overrides */
 @media (max-width: 900px) {
   .team-slider-video-pane {
@@ -665,6 +706,16 @@ html, body {
   }
   .slider-arrow-right {
     right: 12px;
+  }
+  .video-play-overlay {
+    width: 58px;
+    height: 58px;
+    border-width: 1.5px;
+  }
+  .video-play-overlay svg {
+    width: 20px;
+    height: 20px;
+    margin-left: 3px;
   }
 }
 @media (max-width: 620px) {
