@@ -3,12 +3,106 @@ import ScrollReveal from '../components/ScrollReveal'
 import GlowCard from '../components/GlowCard'
 import StatCounter from '../components/StatCounter'
 import { IconBolt, IconCart, IconBuilding, IconWrench, IconRocket, IconRefresh, IconClockAlt, IconDollar, IconUsers } from '../components/Icons'
-import { useEffect } from 'react'
+import { useEffect, useState, useRef } from 'react'
+
+const teamVideos = [
+  {
+    name: 'Arvind Patil',
+    role: 'Chief Strategist',
+    video: '/Videos/arvindv2.mp4',
+    poster: '/assets/team_1.png',
+    bio: 'Leads the vision, growth strategy, and AI-first digital transformation initiatives at Growth Strats, helping businesses scale through modern technology and intelligent execution.',
+    quote: 'We are reshaping the digital landscape by proving that AI-engineered sites can launch in days, without sacrificing an ounce of premium quality.',
+    focus: 'Vision, growth strategies, and enterprise-grade AI solution design.'
+  },
+  {
+    name: 'Umesh',
+    role: 'CTO',
+    video: '/Videos/umeshv2.mp4',
+    poster: '/assets/team_4.jpeg',
+    bio: 'Oversees AI engineering, development architecture, and scalable technology solutions, ensuring high-performance digital products and efficient AI-enabled workflows.',
+    quote: 'By equipping senior developers with optimized AI workflows, we eliminate the boilerplate and focus 100% on delivering high-performance, rock-solid architecture.',
+    focus: 'Development architecture, performance optimization, and AI toolchains.'
+  },
+  {
+    name: 'Mini',
+    role: 'COO / CPO',
+    video: '/Videos/miniv1.mp4',
+    poster: '/assets/team_5.jpeg',
+    bio: 'Drives operations, product execution, and client delivery while creating seamless digital experiences focused on business growth and customer success.',
+    quote: 'Our operations are built on radical transparency. You see daily preview links, pay a fixed rate, and own every single line of code from day one.',
+    focus: 'Product execution, project delivery, operations, and quality assurance.'
+  },
+  {
+    name: 'Kavya',
+    role: 'AI Solution Lead',
+    video: '/Videos/kavyav2.mp4',
+    poster: '/assets/team_3.jpeg',
+    bio: 'Focused on AI research, solution experimentation, and implementation support, helping drive innovation and AI-enabled workflows across digital products and client solutions.',
+    quote: "We don't just use AI to write code; we build custom intelligent solutions directly into our clients' business engines to drive real success.",
+    focus: 'AI research, model experimentation, and intelligent tool integrations.'
+  }
+];
 
 export default function Home() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const videoRef = useRef(null);
+  const isInitialLoad = useRef(true);
+
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    const swipeDistance = touchStartX.current - touchEndX.current;
+    if (swipeDistance > 50) {
+      handleNext();
+    } else if (swipeDistance < -50) {
+      handlePrev();
+    }
+  };
+
+  const changeSlide = (newIndex) => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setActiveIndex(newIndex);
+      setIsTransitioning(false);
+    }, 250);
+  };
+
+  const handleNext = () => {
+    changeSlide((activeIndex + 1) % teamVideos.length);
+  };
+
+  const handlePrev = () => {
+    changeSlide((activeIndex - 1 + teamVideos.length) % teamVideos.length);
+  };
+
   useEffect(() => {
-    document.title = 'GrowthStrats Build — AI-Powered Web Development for Modern Businesses'
-  }, [])
+    document.title = 'GrowthStrats Build — AI-Powered Web Development for Modern Businesses';
+  }, []);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.load();
+      if (isInitialLoad.current) {
+        isInitialLoad.current = false;
+      } else {
+        videoRef.current.play().catch(err => {
+          console.log("Autoplay on slide change blocked or interrupted:", err);
+        });
+      }
+    }
+  }, [activeIndex]);
 
   return (
     <>
@@ -176,8 +270,98 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Behind the Build — Premium Team Video Slider Carousel */}
+      <section className="team-slider-section">
+        <div className="team-slider-glow" />
+        <div className="team-slider-glow-2" />
+        <div className="container">
+          <ScrollReveal>
+            <div className="center" style={{ marginBottom: 48 }}>
+              <span className="eyebrow">Inside the Studio</span>
+              <h2>Behind the Build — Meet the Architects</h2>
+              <p className="lead center" style={{ margin: '0 auto', color: '#cbd5e1' }}>
+                Hear directly from the core leaders of GrowthStrats. We explain our roles, our AI-first developer format, and how we deliver senior-level engineering at unmatched speeds.
+              </p>
+            </div>
+          </ScrollReveal>
+
+          <div className="team-slider-container">
+            {/* Main Centered Widescreen Landscape Card with Swipe Gesture Support */}
+            <div 
+              className={`team-slider-card ${isTransitioning ? 'slide-transitioning' : ''}`}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              <div className="team-slider-video-pane">
+                {/* Left Chevron Button inside video pane */}
+                <button 
+                  className="slider-arrow slider-arrow-left" 
+                  onClick={handlePrev}
+                  aria-label="Previous slide"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="15 18 9 12 15 6" />
+                  </svg>
+                </button>
+
+                <video 
+                  ref={videoRef}
+                  src={teamVideos[activeIndex].video}
+                  poster={teamVideos[activeIndex].poster}
+                  loop
+                  playsInline
+                  controls
+                />
+
+                {/* Right Chevron Button inside video pane */}
+                <button 
+                  className="slider-arrow slider-arrow-right" 
+                  onClick={handleNext}
+                  aria-label="Next slide"
+                >
+                  <svg viewBox="0 0 24 24">
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </button>
+              </div>
+              <div className="team-slider-info-pane">
+                <div className="team-slider-left-col">
+                  <h4>{teamVideos[activeIndex].role}</h4>
+                  <h3>{teamVideos[activeIndex].name}</h3>
+                  <div className="team-slider-quote">
+                    "{teamVideos[activeIndex].quote}"
+                  </div>
+                </div>
+                <div className="team-slider-right-col">
+                  <p className="team-slider-bio">
+                    {teamVideos[activeIndex].bio}
+                  </p>
+                  <div className="team-slider-focus">
+                    <h5>Primary Focus Area</h5>
+                    <p>{teamVideos[activeIndex].focus}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Slider Dot Indicators */}
+          <div className="slider-dots">
+            {teamVideos.map((_, index) => (
+              <button 
+                key={index}
+                className={`slider-dot ${activeIndex === index ? 'active' : ''}`}
+                onClick={() => changeSlide(index)}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Why us / stats */}
-      <section className="section-dark">
+      <section>
         <div className="container">
           <ScrollReveal>
             <div className="center">
@@ -194,7 +378,7 @@ export default function Home() {
               { icon: <IconUsers />, title: 'Senior engineers only', desc: 'Every project is owned end-to-end by AI-enabled developers and designers — no junior handoffs, no shifting team.' },
             ].map((item, i) => (
               <ScrollReveal key={item.title} delay={i * 100}>
-                <GlowCard dark>
+                <GlowCard>
                   <div className="card-header">
                     <div className="icon">{item.icon}</div>
                     <h3>{item.title}</h3>
@@ -318,6 +502,7 @@ export default function Home() {
           </ScrollReveal>
         </div>
       </section>
+
     </>
   )
 }
