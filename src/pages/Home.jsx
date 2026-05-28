@@ -10,7 +10,7 @@ const teamVideos = [
     name: 'Arvind Patil',
     role: 'Chief Strategist',
     video: '/Videos/arvindv2.mp4',
-    poster: '/assets/team_1.png',
+    poster: '/assets/thumb_arvind.png',
     bio: 'Leads the vision, growth strategy, and AI-first digital transformation initiatives at Growth Strats, helping businesses scale through modern technology and intelligent execution.',
     quote: 'We are reshaping the digital landscape by proving that AI-engineered sites can launch in days, without sacrificing an ounce of premium quality.',
     focus: 'Vision, growth strategies, and enterprise-grade AI solution design.'
@@ -19,7 +19,7 @@ const teamVideos = [
     name: 'Umesh',
     role: 'CTO',
     video: '/Videos/umeshv2.mp4',
-    poster: '/assets/team_4.jpeg',
+    poster: '/assets/thumb_umesh.png',
     bio: 'Oversees AI engineering, development architecture, and scalable technology solutions, ensuring high-performance digital products and efficient AI-enabled workflows.',
     quote: 'By equipping senior developers with optimized AI workflows, we eliminate the boilerplate and focus 100% on delivering high-performance, rock-solid architecture.',
     focus: 'Development architecture, performance optimization, and AI toolchains.'
@@ -28,7 +28,7 @@ const teamVideos = [
     name: 'Mini',
     role: 'COO / CPO',
     video: '/Videos/miniv1.mp4',
-    poster: '/assets/team_5.jpeg',
+    poster: '/assets/thumb_mini.png',
     bio: 'Drives operations, product execution, and client delivery while creating seamless digital experiences focused on business growth and customer success.',
     quote: 'Our operations are built on radical transparency. You see daily preview links, pay a fixed rate, and own every single line of code from day one.',
     focus: 'Product execution, project delivery, operations, and quality assurance.'
@@ -37,7 +37,7 @@ const teamVideos = [
     name: 'Kavya',
     role: 'AI Solution Lead',
     video: '/Videos/kavyav2.mp4',
-    poster: '/assets/team_3.jpeg',
+    poster: '/assets/thumb_kavya.png',
     bio: 'Focused on AI research, solution experimentation, and implementation support, helping drive innovation and AI-enabled workflows across digital products and client solutions.',
     quote: "We don't just use AI to write code; we build custom intelligent solutions directly into our clients' business engines to drive real success.",
     focus: 'AI research, model experimentation, and intelligent tool integrations.'
@@ -49,7 +49,6 @@ export default function Home() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false); // Track play state
   const videoRef = useRef(null);
-  const isInitialLoad = useRef(true);
 
   const touchStartX = useRef(0);
   const touchEndX = useRef(0);
@@ -105,16 +104,9 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    setIsPlaying(false); // Reset play state when activeIndex changes
+    setIsPlaying(false); // Reset play state and pause player when activeIndex changes
     if (videoRef.current) {
-      videoRef.current.load();
-      if (isInitialLoad.current) {
-        isInitialLoad.current = false;
-      } else {
-        videoRef.current.play().catch(err => {
-          console.log("Autoplay on slide change blocked or interrupted:", err);
-        });
-      }
+      videoRef.current.load(); // Load the new video source which automatically shows the poster paused by default
     }
   }, [activeIndex]);
 
