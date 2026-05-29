@@ -115,11 +115,12 @@ export default function Home() {
     if (isPlaying) return;
 
     // Slide automatically every 4 seconds when the video is paused
-    const interval = setInterval(() => {
+    // Using a setTimeout chained to activeIndex/isPlaying changes makes the transition timer extremely robust
+    const timer = setTimeout(() => {
       handleNext();
     }, 4000);
 
-    return () => clearInterval(interval);
+    return () => clearTimeout(timer);
   }, [isPlaying, activeIndex]);
 
   return (
