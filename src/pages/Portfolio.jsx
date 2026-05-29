@@ -14,6 +14,15 @@ const projects = [
     link: 'https://myreminder.xyz',
   },
   {
+    img: '/assets/portfolio_nddb.png',
+    category: 'Corporate',
+    meta: 'Corporate · Agriculture',
+    title: 'NDDB Dairy Services — Institutional & Livestock Development Platform',
+    desc: 'Empowering millions of rural dairy farmers. Designed and developed a secure, multi-tenant digital infrastructure facilitating Milk Producer Organisations (MPOs) and Superior Animal Genetics (SAG) nationwide.',
+    tags: ['React', 'Corporate', 'Enterprise'],
+    link: 'https://www.nddbdairyservices.com/',
+  },
+  {
     img: '/assets/portfolio_techcognate.png',
     category: 'Corporate',
     meta: 'Corporate · Digital Agency',
@@ -21,6 +30,15 @@ const projects = [
     desc: 'Full-service Digital Agency serving in various domains. We are result driven and specialized in SEO, content marketing, link building, web design, and development.',
     tags: ['Corporate', 'SEO', 'Web Design'],
     link: 'https://www.techcognate.com/',
+  },
+  {
+    img: '/assets/portfolio_alamadhi.png',
+    category: 'Service business',
+    meta: 'Biotech · Service Business',
+    title: 'Alamadhi Semen Station — Bovine Genetics & Training Portal',
+    desc: 'A Grade "A" biotechnology and livestock training repository managing over 300 elite bulls, native breeds conservation, and state-of-the-art animal husbandry education programs.',
+    tags: ['Biotech', 'Service Business', 'Training Portal'],
+    link: 'https://alamadhisemenstation.com/',
   },
   {
     img: '/assets/portfolio_telesleep.png',
