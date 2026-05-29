@@ -110,6 +110,18 @@ export default function Home() {
     }
   }, [activeIndex]);
 
+  useEffect(() => {
+    // Only auto-slide if the video is NOT currently playing
+    if (isPlaying) return;
+
+    // Slide automatically every 4 seconds when the video is paused
+    const interval = setInterval(() => {
+      handleNext();
+    }, 4000);
+
+    return () => clearInterval(interval);
+  }, [isPlaying, activeIndex]);
+
   return (
     <>
       {/* Hero */}
