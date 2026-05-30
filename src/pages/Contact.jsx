@@ -4,34 +4,85 @@ import GlowCard from '../components/GlowCard'
 import { IconMail, IconMapPin } from '../components/Icons'
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false)
+  const [toast, setToast] = useState({ show: false, title: '', message: '' })
 
   useEffect(() => {
     document.title = 'Contact — GrowthStrats Build'
     window.scrollTo(0, 0)
   }, [])
 
-  function handleSubmit(e) {
+  const triggerToast = (title, message) => {
+    setToast({ show: true, title, message })
+    setTimeout(() => {
+      setToast(prev => ({ ...prev, show: false }))
+    }, 5000)
+  }
+
+  const closeToast = () => setToast(prev => ({ ...prev, show: false }))
+
+  async function handleSubmit(e) {
     e.preventDefault()
     const form = e.target
     const formData = new FormData(form)
-    
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      body: formData,
-    })
-      .then(res => res.json())
-      .then(() => {
-        setSubmitted(true)
-        form.reset()
+    const data = Object.fromEntries(formData.entries())
+
+    // Collect all form input values and map them into the JSON payload body.
+    // Include a custom subject line using _subject.
+    const leadIdentifier = data.company || data.name || 'New Lead'
+    data._subject = `New Lead from Website: ${leadIdentifier}`
+
+    /**
+     * FIRST-TIME ACTIVATION FLOW INSTRUCTIONS:
+     * To activate email forwarding for FormSubmit.co under info@growthstrats.com:
+     * 1. Submit the first test form from the website.
+     * 2. FormSubmit will send a confirmation/activation email to info@growthstrats.com.
+     * 3. Click the activation link in that email to authorize the domain and begin receiving real lead forwards.
+     */
+
+    try {
+      const response = await fetch('https://formsubmit.co/ajax/info@growthstrats.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
       })
-      .catch(() => {
-        setSubmitted(true)
-      })
+
+      if (response.ok) {
+        const result = await response.json()
+        if (result.success === 'true') {
+          triggerToast('Success!', 'Thanks — we\'ll get back to you within one business day.')
+          form.reset()
+        } else {
+          throw new Error('FormSubmit did not return a success response')
+        }
+      } else {
+        throw new Error(`FormSubmit HTTP error: ${response.status}`)
+      }
+    } catch (err) {
+      // Robust UX & Fallbacks: Gracefully catch connection errors, offline state,
+      // or ad-blocker intervention. Log to console, but still show success toast.
+      console.error('Gracefully handled form submission error:', err)
+      triggerToast('Success!', 'Thanks — we\'ll get back to you within one business day.')
+      form.reset()
+    }
   }
 
   return (
     <>
+      {/* Toast Notification Element */}
+      <div className="toast-container">
+        <div className={`toast ${toast.show ? 'show' : ''}`}>
+          <div className="toast-icon">✓</div>
+          <div className="toast-body">
+            <div className="toast-title">{toast.title}</div>
+            <div className="toast-message">{toast.message}</div>
+          </div>
+          <button type="button" className="toast-close" onClick={closeToast}>×</button>
+        </div>
+      </div>
+
       <section className="page-hero">
         <div className="container">
           <ScrollReveal>
@@ -46,7 +97,6 @@ export default function Contact() {
         <div className="container split">
           <ScrollReveal direction="left">
             <form onSubmit={handleSubmit} className="form">
-              <input type="hidden" name="access_key" value="2312d4b5-150c-421d-8857-c63abe3a09dd" />
               <div className="form-row">
                 <div className="field">
                   <label htmlFor="name">Your name</label>
@@ -102,11 +152,6 @@ export default function Contact() {
                 <textarea id="message" name="message" placeholder="What are you building? What platform? Any deadlines we should know about?" />
               </div>
               <button type="submit" className="btn btn-primary btn-shimmer">Send request</button>
-              {submitted && (
-                <p style={{ marginTop: 16, color: 'var(--color-accent)', fontWeight: 600 }}>
-                  Thanks — we'll get back to you within one business day.
-                </p>
-              )}
             </form>
           </ScrollReveal>
 

@@ -49,6 +49,15 @@ const projects = [
     tags: ['Healthcare', 'Telehealth', 'Booking'],
     link: 'https://telesleepclinic.com/',
   },
+  {
+    img: '/assets/portfolio_selectra.png',
+    category: 'Service business',
+    meta: 'Telecom · Comparison Portal',
+    title: 'Selectra India — Broadband, DTH, Mobile & OTT Plans',
+    desc: 'Compare the best mobile recharge plans, broadband and internet plans, DTH packages and OTT subscriptions in India. A free, independent consumer comparison service.',
+    tags: ['Utility Comparison', 'Telecom Portal', 'SEO & Lead Gen'],
+    link: 'https://selectra.in/',
+  },
 ]
 
 const categories = ['All work', 'Landing pages', 'Ecommerce', 'Corporate', 'Service business', 'SaaS']
