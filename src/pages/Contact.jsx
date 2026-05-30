@@ -28,8 +28,9 @@ export default function Contact() {
 
     // Collect all form input values and map them into the JSON payload body.
     // Include a custom subject line using _subject.
-    const leadIdentifier = data.company || data.name || 'New Lead'
-    data._subject = `New Lead from Website: ${leadIdentifier}`
+    const companyName = data.company ? data.company.trim() : 'No Company'
+    const clientName = data.name ? data.name.trim() : 'No Name'
+    data._subject = `New Enquiry - ${companyName} - ${clientName}`
 
     /**
      * FIRST-TIME ACTIVATION FLOW INSTRUCTIONS:
